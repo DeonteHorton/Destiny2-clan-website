@@ -1,0 +1,196 @@
+
+DROP DATABASE if exists destiny2_clan_info;
+CREATE DATABASE destiny2_clan_info;
+USE destiny2_clan_info;
+
+CREATE TABLE guardians(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    guardian_type varchar(10)
+);
+CREATE TABLE classes(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class varchar(25)
+);
+CREATE TABLE ranking(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    rank varchar(20)
+);
+
+DROP TABLE IF exists messages;
+CREATE TABLE messages(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name varchar(30),
+    timestamp datetime,
+    message text
+);
+
+CREATE TABLE `contact` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` varchar(30) default NULL,
+  `email` varchar(60) default NULL,
+  `comment` TEXT default NULL,
+  PRIMARY KEY (`id`)
+) AUTO_INCREMENT=1;
+
+CREATE TABLE account(
+    id int auto_increment primary key,
+    email varchar(30),
+    username varchar(30),
+    fname varchar(20),
+    lname varchar(20),
+    age tinyint,
+    password varchar(20),
+    guardian_id int,
+    class_id int,
+    rank_id int,
+    created_on date,
+    CONSTRAINT fk_guardian_id FOREIGN KEY (guardian_id) REFERENCES guardians(id),
+    CONSTRAINT fk_class_id FOREIGN KEY (class_id) REFERENCES classes(id),
+    CONSTRAINT fk_rank_id FOREIGN KEY (rank_id) REFERENCES ranking(id)
+);
+
+INSERT INTO guardians (guardian_type) VALUES 
+('Hunter'),
+('Titan'),
+('Warlock');
+
+INSERT INTO ranking (rank) VALUES
+('Founder'),
+('Co-Founder'),
+('VIP'),
+('member'),
+('freshman');
+
+INSERT INTO classes (class) VALUES 
+('Arc Strider'),
+('Gunslinger'),
+('Night Stalker'),
+('Sentinel'),
+('Striker'),
+('Sunbreaker'),
+('Dawn Blade'),
+('Void Walker'),
+('Storm Caller');
+
+INSERT INTO account (
+    email ,
+    username ,
+    fname ,
+    lname ,
+    age ,
+    password ,
+    guardian_id ,
+    class_id,
+    rank_id,
+    created_on
+) VALUES (
+    'deonte@nuya.com',
+    'Clan Leader',
+    'deonte',
+    'horton',
+    '19',
+    '123Deonte',
+    '1',
+    '2',
+    '1',
+    NOW()
+);
+
+INSERT INTO account (
+    email ,
+    username ,
+    fname ,
+    lname ,
+    age ,
+    password ,
+    guardian_id ,
+    class_id,
+    rank_id,
+    created_on
+) VALUES (
+    'bleach@nuya.com',
+    'Admini',
+    'Marlon',
+    'Morrison',
+    '19',
+    'MirrorMan',
+    '2',
+    '5',
+    '2',
+    NOW()
+);
+
+INSERT INTO `contact` (`name`,`email`,`comment`) VALUES 
+("Warren","Nunc@dis.edu","Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum,"),
+("Casey","ut.odio.vel@maurisSuspendissealiquet.ca","quam, elementum at, egestas a, scelerisque sed, sapien. Nunc pulvinar arcu et pede. Nunc sed orci lobortis augue scelerisque mollis. Phasellus libero mauris, aliquam eu, accumsan sed, facilisis vitae, orci."),
+("Kuame","consectetuer@quamCurabitur.net","Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget mollis lectus pede et risus. Quisque libero lacus, varius et, euismod et, commodo at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper"),
+("Jonas","id.libero.Donec@mollisvitaeposuere.edu","eu, accumsan sed,"),
+("Allegra","a.malesuada@consectetueradipiscing.ca","sed dictum eleifend, nunc risus varius orci, in consequat enim diam vel arcu. Curabitur ut odio vel est tempor bibendum. Donec felis orci, adipiscing non, luctus sit amet, faucibus ut, nulla. Cras eu tellus eu augue porttitor"),
+("Eric","eu@ametconsectetueradipiscing.net","Sed neque. Sed eget lacus. Mauris non dui nec urna suscipit nonummy. Fusce fermentum fermentum arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices"),
+("Jana","urna@ipsumdolorsit.ca","mus. Proin vel arcu eu odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et, lacinia vitae, sodales at, velit. Pellentesque ultricies dignissim"),
+("Gisela","sit.amet.ultricies@ornareInfaucibus.com","ac mi eleifend egestas. Sed"),
+("Xenos","quis.tristique.ac@dolordapibusgravida.ca","natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu eu odio tristique pharetra. Quisque ac"),
+("Ciaran","adipiscing.elit@necimperdietnec.co.uk","felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus");
+
+
+-- works
+-- joins on id
+SELECT a.fname , a.lname, a.username,a.email,
+g.guardian_type as guardian,
+r.rank as rank,
+c.class as class
+FROM account a
+JOIN ranking r ON a.rank_id= r.id
+JOIN guardians g ON a.guardian_id = g.id
+JOIN classes c ON a.class_id = c.id
+WHERE a.id = 1;
+
+-- works
+SELECT a.fname,a.lname,a.username,a.email
+r.rank as rank,
+g.guardian_type as guardian,
+c.class as class
+from account a 
+JOIN ranking r ON a.rank_id= r.id
+JOIN guardians g ON a.guardian_id = g.id
+JOIN classes c ON a.class_id = c.id;
+
+
+-- gets all from accounts and joins the guardian and class name on table 
+-- works
+-- if they missing data with any of the joins, they will not show up
+
+SELECT a.id, a.fname,a.lname,a.username,a.email,a.created_on, 
+r.rank as rank,
+g.guardian_type as guardian,
+c.class as g_class
+from account a
+JOIN ranking r ON a.rank_id= r.id
+JOIN guardians g ON a.guardian_id = g.id
+JOIN classes c ON a.class_id = c.id
+ORDER BY r.id ASC;
+
+SELECT a.id, a.fname,a.lname,a.username,a.age,a.email,a.created_on, 
+r.rank as rank,
+g.guardian_type as guardian,
+c.class as g_class
+from account a
+JOIN ranking r ON a.rank_id= r.id
+JOIN guardians g ON a.guardian_id = g.id
+JOIN classes c ON a.class_id = c.id
+WHERE a.id = 1;
+
+SELECT * FROM users ORDER BY lname ASC;
+SELECT * FROM users ORDER BY lname DESC;
+ASC- 1-9/ A-Z
+DESC- 9-1/ Z-A
+
+select s.sort as sort, p.name, p.location, p.price, p.person,p.days 
+from packages P 
+JOIN sort s ON p.sort_id = s.id;
+
+select sl.id,sl.spell_name,sl.mp_cost,sl.description, 
+st.school_name as spell_type 
+from spell_list sl
+JOIN spell_type st ON sl.spell_type_id = st.id
+ORDER BY sl.id ASC;
