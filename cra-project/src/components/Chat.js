@@ -120,6 +120,7 @@ class Chat extends Component{
     }
 
     const MemberData =  this.state.data.map(message => <this.Messages key={message.id} data={message}/>)
+    const [{user}] = this.context
 
         return (
             <>
@@ -137,8 +138,8 @@ class Chat extends Component{
                 <div className="container-fuild">
                     <div className="row">
                         <div className="col-sm-12"> 
-                        {MemberData}
-                            {this.state.messages.map((message,idx) => {
+                        { user.username === 'Guest' ?  <h1 style={Name}>You must Sign in First!!</h1> :  MemberData}
+                            {user.username === 'Guest' ?  null : this.state.messages.map((message,idx) => {
                                 return (
                                     <>
                                     <p style={Name}>{message.author}</p>
