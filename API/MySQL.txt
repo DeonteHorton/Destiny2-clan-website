@@ -133,7 +133,6 @@ INSERT INTO `contact` (`name`,`email`,`comment`) VALUES
 ("Ciaran","adipiscing.elit@necimperdietnec.co.uk","felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus");
 
 
--- works
 -- joins on id
 SELECT a.fname , a.lname, a.username,a.email,
 g.guardian_type as guardian,
@@ -145,7 +144,6 @@ JOIN guardians g ON a.guardian_id = g.id
 JOIN classes c ON a.class_id = c.id
 WHERE a.id = 1;
 
--- works
 SELECT a.fname,a.lname,a.username,a.email
 r.rank as rank,
 g.guardian_type as guardian,
@@ -157,7 +155,7 @@ JOIN classes c ON a.class_id = c.id;
 
 
 -- gets all from accounts and joins the guardian and class name on table 
--- works
+
 -- if they missing data with any of the joins, they will not show up
 
 SELECT a.id, a.fname,a.lname,a.username,a.email,a.created_on, 
@@ -194,31 +192,3 @@ st.school_name as spell_type
 from spell_list sl
 JOIN spell_type st ON sl.spell_type_id = st.id
 ORDER BY sl.id ASC;
-
-
-
-    currentLogs = [ 
-       { socket_id: 'Server', message: 'Socketio online', data: 'Port 3333', logged: '2014-05-14 14:41:11' }, 
-       { socket_id: 'Server', message: 'Waiting for Pi to connect...', data: 'Port: 8082', logged: '2014-05-14 14:41:11' }
-    ];
-
-    // You can do something like this:
-    
-    // connection.query('INSERT INTO logs_debug SET ?'[currentLogs.map(logs.socket_id,logs.message,logs.data,logs.logged)], function(err, rows) { connection.release();
-
-    let fields = Object.keys(req.body);
-    let values = Object.values(req.body);
-          
-      
-    let sql = `INSERT into account (${fields.join(',')}) values (${Array(values.length - 2).fill('?').join(',')},5,NOW())`
-
-    this.pool.query(sql,values,
-      function (error,rows){
-      if (error) {
-        res.json({
-          "error":true,
-          "message":error
-        })
-      };
-      res.json(rows)
-    })

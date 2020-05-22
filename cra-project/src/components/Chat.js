@@ -139,6 +139,7 @@ class Chat extends Component{
                     <div className="row">
                         <div className="col-sm-12"> 
                         { user.username === 'Guest' ?  <h1 style={Name}>You must Sign in First!!</h1> :  MemberData}
+
                             {user.username === 'Guest' ?  null : this.state.messages.map((message,idx) => {
                                 return (
                                     <>
@@ -147,6 +148,7 @@ class Chat extends Component{
                                     </>
                                 )
                             })}
+
                         </div>
                     </div>
                     <div className="row">
