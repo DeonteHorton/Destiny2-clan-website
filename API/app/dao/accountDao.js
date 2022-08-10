@@ -33,7 +33,7 @@ class AccountDao {
   
   }
   
-  run = (req,res,sql)  => {
+  run(req,res,sql) {
     pool.query(sql,function (error,rows) {
       if (error) {
         res.json({
