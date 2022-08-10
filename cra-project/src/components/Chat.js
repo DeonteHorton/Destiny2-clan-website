@@ -17,7 +17,7 @@ class Chat extends Component{
             data:[]
         };
 
-    this.socket = io('http://localhost:8080');
+    this.socket = io('http://104.248.234.208:8080');
 
     this.socket.on('RECEIVE_MESSAGE', function(data){
         addMessage(data);
@@ -46,7 +46,7 @@ class Chat extends Component{
              "timestamp":''
         }
 
-        fetch('http://localhost:3006/api/chat/create',{
+        fetch('http://104.248.234.208:3006/api/chat/create',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ class Chat extends Component{
                 })
             }
         }
-        fetch('http://localhost:3006/api/chat')
+        fetch('http://104.248.234.208:3006/api/chat')
         .then(response => response.json())
         .then(data =>{
             this.setState({
