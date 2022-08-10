@@ -43,7 +43,7 @@ class Members extends Component{
 
    
     componentDidMount(){
-        fetch('http://localhost:3006/api/accounts/members_data')
+        fetch('http://104.248.234.208:3006/api/accounts/members_data')
         .then(response => response.json())
         .then(data =>{
             this.setState({
