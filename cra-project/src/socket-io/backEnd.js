@@ -5,7 +5,7 @@ var app = express();
 
 
 let server = app.listen(8080,()=>{
-    console.log(`Server at http://localhost:8080`);
+    console.log(`Server at http://http://104.248.234.208:8080`);
 })
 var socket = require('socket.io');
 io = socket(server);
