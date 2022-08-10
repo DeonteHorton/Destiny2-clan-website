@@ -11,7 +11,7 @@ const Error = (prop) =>{
     }
     return(
         <>
-        <h1 style={style}>404:Your ghost couldn't find <span style={highlight}>http://localhost:3000{[prop.location.pathname]}</span></h1>
+        <h1 style={style}>404:Your ghost couldn't find <span style={highlight}>http://104.248.234.208{[prop.location.pathname]}</span></h1>
         </>
     )
 }
