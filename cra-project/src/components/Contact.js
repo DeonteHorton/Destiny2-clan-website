@@ -22,7 +22,7 @@ import Header from './Header'
         if (name === '' || email === '' || comment === '') {
             window.alert('Missing Data in one or more input field')
         } else {
-            fetch('http://localhost:3006/api/contacts/create',{
+            fetch('http://104.248.234.208/:3006/api/contacts/create',{
                 method:'POST',
                 headers: {
                  'Content-Type': 'application/json',
