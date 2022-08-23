@@ -129,7 +129,7 @@ class Sign_Up extends React.Component{
         } 
         else{
             window.alert('Thank you for joining us!')
-            fetch('http://104.248.234.208:3006/api/accounts/create',{
+            fetch('http://68.183.143.81:3006/api/accounts/create',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',
