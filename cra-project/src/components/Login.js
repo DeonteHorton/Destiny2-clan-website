@@ -23,7 +23,7 @@ class Login extends React.Component{
         
         const [{user},dispatch] = this.context;
         
-        fetch(`http://104.248.234.208:3006/api/accounts/search_account/${user_name}&${password}`)
+        fetch(`http://68.183.143.81:3006/api/accounts/search_account/${user_name}&${password}`)
         .then(response => response.json())
         .then(data => {
             if (data.length === 0 || data === undefined) {
