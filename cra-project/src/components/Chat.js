@@ -17,7 +17,7 @@ class Chat extends Component{
             data:[]
         };
 
-    this.socket = io('http://104.248.234.208:8080');
+    this.socket = io('http://68.183.143.81:8080');
 
     this.socket.on('RECEIVE_MESSAGE', function(data){
         addMessage(data);
