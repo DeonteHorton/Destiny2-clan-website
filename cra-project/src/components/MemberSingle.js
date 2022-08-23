@@ -7,7 +7,7 @@ const MemberSingle = (props) =>{
     
     const {id} = props.match.params;
     useEffect(()=>{
-        fetch(`http://104.248.234.208:3006/api/accounts/members_data/${id}`)
+        fetch(`http://68.183.143.81:3006/api/accounts/members_data/${id}`)
         .then(response => response.json())
         .then(data => {
             getMember(data.map(member => <MemberData key={member.id} Member={member}/>))
