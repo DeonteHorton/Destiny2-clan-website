@@ -4,7 +4,7 @@ class AccountDao {
   constructor(){
       this.pool = pool
   }
-  
+
   create(req,res){
     // required min data
     if (!req.body.email || !req.body.username || !req.body.password || !req.body.fname || !req.body.lname || !req.body.age || !req.body.guardian_id || !req.body.class_id) {
@@ -16,8 +16,8 @@ class AccountDao {
 
     let fields = Object.keys(req.body);
     let values = Object.values(req.body);
-          
-      
+
+
     let sql = `INSERT into account (${fields.join(',')}) values (${Array(values.length - 2).fill('?').join(',')},5,NOW())`
 
     this.pool.query(sql,values,
@@ -30,9 +30,9 @@ class AccountDao {
       };
       res.json(rows)
     })
-  
+
   }
-  
+
   run(req,res,sql) {
     pool.query(sql,function (error,rows) {
       if (error) {
@@ -47,7 +47,7 @@ class AccountDao {
 
   getAllAccounts(req,res){
     let sql ='SELECT * from account ';
-    
+
     this.pool.query(sql, function (error,rows){
         if (error) {
           res.json({
@@ -61,7 +61,7 @@ class AccountDao {
 
   searchForAccount(req,res){
     let sql ='SELECT * from account where username = ? AND password = ? ';
-    
+
     this.pool.query(sql,[req.params.username, req.params.password], function (error,rows){
         if (error) {
           res.json({
@@ -73,7 +73,7 @@ class AccountDao {
     })
   }
 
-  
+
   findByUserName(req,res){
     let sql =`SELECT * from account where username = ?`
 
@@ -116,7 +116,7 @@ class AccountDao {
       res.json(rows)
     })
   }
-  
+
   findByAge(req,res){
     let sql = `SELECT * from account WHERE age = ?`;
 
@@ -172,7 +172,7 @@ class AccountDao {
   }
 
   collectMemberData(req,res){
-    let sql = `SELECT a.id, a.fname,a.lname,a.username,a.email,a.created_on, 
+    let sql = `SELECT a.id, a.fname,a.lname,a.username,a.email,a.created_on,
     r.rank as rank,
     g.guardian_type as guardian,
     c.class as g_class
@@ -194,7 +194,7 @@ class AccountDao {
   }
 
   findMemberDatabyId(req,res){
-    let sql = `SELECT a.id, a.fname,a.lname,a.username,a.age,a.email,a.created_on, 
+    let sql = `SELECT a.id, a.fname,a.lname,a.username,a.age,a.email,a.created_on,
     r.rank as rank,
     g.guardian_type as guardian,
     c.class as g_class
@@ -213,7 +213,7 @@ class AccountDao {
       };
       res.json(rows)
     })
-  } 
+  }
 }
-  
+
 module.exports = AccountDao;

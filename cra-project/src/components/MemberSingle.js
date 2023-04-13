@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 
 const MemberSingle = (props) =>{
     const [Member, getMember] = useState([])
-    
+
     const {id} = props.match.params;
     useEffect(()=>{
-        fetch(`http://68.183.143.81:3006/api/accounts/members_data/${id}`)
+        fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/accounts/members_data/${id}`)
         .then(response => response.json())
         .then(data => {
             getMember(data.map(member => <MemberData key={member.id} Member={member}/>))
         })
     },[id])
 
-    
+
     const MemberData = (props) =>{
         const random_number = Math.floor(Math.random() * 100);
         const link = `https://api.adorable.io/avatars/250x275/${random_number}`
@@ -23,10 +23,10 @@ const MemberSingle = (props) =>{
             borderRadius: '20%',
             border: '2px solid black'
         }
-    
+
         return(
             <div>
-                <img style={style} src={link} a/>
+                <img style={style} src={link} alt="avatar"/>
                 <p>User Name: {username}</p>
                 <p>Name:{fname} {lname} </p>
                 <p>Email: {email}</p>

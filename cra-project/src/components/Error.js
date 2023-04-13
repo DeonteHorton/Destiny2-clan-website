@@ -11,7 +11,7 @@ const Error = (prop) =>{
     }
     return(
         <>
-        <h1 style={style}>404:Your ghost couldn't find <span style={highlight}>http://68.183.143.81{[prop.location.pathname]}</span></h1>
+        <h1 style={style}>404:Your ghost couldn't find <span style={highlight}>{process.env.REACT_APP_URL}{[prop.location.pathname]}</span></h1>
         </>
     )
 }

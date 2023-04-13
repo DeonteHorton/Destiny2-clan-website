@@ -2,7 +2,6 @@ import React,{Component} from 'react'
 import Header from './Header'
 
 
-
  class Contact extends Component{
 
     post_form = (eve) =>{
@@ -10,8 +9,8 @@ import Header from './Header'
         let name = document.getElementById('contact-name').value;
         let email = document.getElementById('contact-email').value;
         let comment = document.getElementById('contact-comment').value;
-    
-     
+
+
         const data = {
         "name":name,
         "email":email,
@@ -22,7 +21,7 @@ import Header from './Header'
         if (name === '' || email === '' || comment === '') {
             window.alert('Missing Data in one or more input field')
         } else {
-            fetch('http://68.183.143.81/:3006/api/contacts/create',{
+            fetch(`${process.env.REACT_APP_URL}/:${process.env.REACT_APP_BACKEND_PORT}/api/contacts/create`,{
                 method:'POST',
                 headers: {
                  'Content-Type': 'application/json',
@@ -35,7 +34,7 @@ import Header from './Header'
              document.getElementById('contact-name').value = ''
              document.getElementById('contact-email').value = ''
              document.getElementById('contact-comment').value = ''
-        }  
+        }
     }
     render(){
         return (
@@ -52,9 +51,9 @@ import Header from './Header'
                                 <input type="text" className="space" id='contact-email' placeholder="Email*"/>
                                 <br/>
                                 <textarea name="comment" className="space" cols="20" rows="5" id='contact-comment' placeholder="Questions/Concerns...."/>
-                                <br/>    
-                                <input className='btn btn-primary' type="submit" value="Submit"/>   
-                            </form>  
+                                <br/>
+                                <input className='btn btn-primary' type="submit" value="Submit"/>
+                            </form>
                             </div>
                         <div className="col-sm-6 hidden-xs box">
                             <h1>Want to learn more?</h1>
@@ -80,9 +79,9 @@ import Header from './Header'
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </div>
-            </div> 
+            </div>
             </>
         )
     }

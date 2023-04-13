@@ -65,7 +65,7 @@ class Sign_Up extends React.Component{
     }
 
     handleChange = (e) =>{
-        
+
         let options = classes.filter((subclass) => {
             if (subclass.guardian_id === e.target.value) {
                 return <option value={subclass.value}>{subclass.class}</option>
@@ -74,12 +74,12 @@ class Sign_Up extends React.Component{
         this.setState({
             value: e.target.value,
             classes:options
-        })        
+        })
     }
 
      post_form = (eve) =>{
         eve.preventDefault();
-        
+
         let first_name = document.getElementById('first-name').value;
         let last_name = document.getElementById('last-name').value;
         let user = document.getElementById('username').value;
@@ -91,11 +91,11 @@ class Sign_Up extends React.Component{
         let g_value = guardian_select.options[guardian_select.selectedIndex].value;
         let class_select = document.getElementById("classes");
         let c_value = class_select.options[class_select.selectedIndex].value;
-     
+
         const data = {
          "email":email,
          "username":user,
-         "password":password,  
+         "password":password,
          "fname": first_name,
          "lname":last_name,
          "age":age,
@@ -104,32 +104,32 @@ class Sign_Up extends React.Component{
          "rank_id":'',
          "created_on":''
         }
-        
+
 
         if(email === '' ||  user === '' || password === '' || first_name === '' || last_name === '' || age === '' || g_value === 'Guardian' || c_value === 'Class' ){
             window.alert('Missing Data in one or more input field')
-        } 
+        }
         else if (password.length < 8 || password.length > 20 ){
             window.alert(`Password must be at least 8 characters and no more than 20 characters `)
-        } 
+        }
         else if (!password.match(/[A-Z]/g)){
             window.alert('Password must contain atleast one uppercase letter')
-        } 
+        }
         else if (!password.match(/[a-z]/g)){
             window.alert('Password must contain atleast one lowercase letter')
-        } 
+        }
         else if (!password.match(/[0-9]/g)){
             window.alert('Password must contain atleast one number')
         }
         else if (!password.match(/[!@#$%^&*_:?|]/g)){
             window.alert('Password must contain at least one special character')
-        }         
+        }
         else if (password !== confirm_password){
             window.alert('Password does not match confirm password')
-        } 
+        }
         else{
             window.alert('Thank you for joining us!')
-            fetch('http://68.183.143.81:3006/api/accounts/create',{
+            fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/accounts/create`,{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -140,9 +140,9 @@ class Sign_Up extends React.Component{
             .then(data)
             this.setState(() => ({
                 redirect: true
-            })) 
+            }))
 
-        } 
+        }
     }
 
     render(){
@@ -214,7 +214,7 @@ class Sign_Up extends React.Component{
                             </div>
                         </div>
                     </div>
-                </form>  
+                </form>
             </div>
             </>
         )

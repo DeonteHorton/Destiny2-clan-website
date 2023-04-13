@@ -24,9 +24,9 @@ class Members extends Component{
             borderRadius: '20%',
             border: '2px solid black'
         }
-    
+
         const {id,username,guardian,g_class,rank,created_on} = props.account
-    
+
         return(
             <>
             <Link to={`/members/${id}`} className="group">
@@ -41,9 +41,9 @@ class Members extends Component{
         )
     }
 
-   
+
     componentDidMount(){
-        fetch('http://104.248.234.208:3006/api/accounts/members_data')
+        fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/accounts/members_data`)
         .then(response => response.json())
         .then(data =>{
             this.setState({
@@ -52,7 +52,7 @@ class Members extends Component{
             })
         })
     }
-    
+
     render(){
         const Members =this.state.loading ? <Loading /> : this.state.account.map(member => <this.MemberData key={member.id} account={member}/>)
 

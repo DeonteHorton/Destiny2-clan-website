@@ -13,7 +13,7 @@ CREATE TABLE classes(
 );
 CREATE TABLE ranking(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    rank varchar(20)
+    `rank` varchar(20)
 );
 
 DROP TABLE IF exists messages;
@@ -49,19 +49,19 @@ CREATE TABLE account(
     CONSTRAINT fk_rank_id FOREIGN KEY (rank_id) REFERENCES ranking(id)
 );
 
-INSERT INTO guardians (guardian_type) VALUES 
+INSERT INTO guardians (guardian_type) VALUES
 ('Hunter'),
 ('Titan'),
 ('Warlock');
 
-INSERT INTO ranking (rank) VALUES
+INSERT INTO ranking (`rank`) VALUES
 ('Founder'),
 ('Co-Founder'),
 ('VIP'),
 ('member'),
 ('freshman');
 
-INSERT INTO classes (class) VALUES 
+INSERT INTO classes (class) VALUES
 ('Arc Strider'),
 ('Gunslinger'),
 ('Night Stalker'),
@@ -120,7 +120,7 @@ INSERT INTO account (
     NOW()
 );
 
-INSERT INTO `contact` (`name`,`email`,`comment`) VALUES 
+INSERT INTO `contact` (`name`,`email`,`comment`) VALUES
 ("Warren","Nunc@dis.edu","Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum,"),
 ("Casey","ut.odio.vel@maurisSuspendissealiquet.ca","quam, elementum at, egestas a, scelerisque sed, sapien. Nunc pulvinar arcu et pede. Nunc sed orci lobortis augue scelerisque mollis. Phasellus libero mauris, aliquam eu, accumsan sed, facilisis vitae, orci."),
 ("Kuame","consectetuer@quamCurabitur.net","Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget mollis lectus pede et risus. Quisque libero lacus, varius et, euismod et, commodo at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper"),
@@ -136,7 +136,7 @@ INSERT INTO `contact` (`name`,`email`,`comment`) VALUES
 -- joins on id
 SELECT a.fname , a.lname, a.username,a.email,
 g.guardian_type as guardian,
-r.rank as rank,
+r.rank as `rank`,
 c.class as class
 FROM account a
 JOIN ranking r ON a.rank_id= r.id
@@ -145,20 +145,20 @@ JOIN classes c ON a.class_id = c.id
 WHERE a.id = 1;
 
 SELECT a.fname,a.lname,a.username,a.email
-r.rank as rank,
+r.rank as `rank`,
 g.guardian_type as guardian,
 c.class as class
-from account a 
+from account a
 JOIN ranking r ON a.rank_id= r.id
 JOIN guardians g ON a.guardian_id = g.id
 JOIN classes c ON a.class_id = c.id;
 
 
--- gets all from accounts and joins the guardian and class name on table 
+-- gets all from accounts and joins the guardian and class name on table
 
 -- if they missing data with any of the joins, they will not show up
 
-SELECT a.id, a.fname,a.lname,a.username,a.email,a.created_on, 
+SELECT a.id, a.fname,a.lname,a.username,a.email,a.created_on,
 r.rank as rank,
 g.guardian_type as guardian,
 c.class as g_class
@@ -168,7 +168,7 @@ JOIN guardians g ON a.guardian_id = g.id
 JOIN classes c ON a.class_id = c.id
 ORDER BY r.id ASC;
 
-SELECT a.id, a.fname,a.lname,a.username,a.age,a.email,a.created_on, 
+SELECT a.id, a.fname,a.lname,a.username,a.age,a.email,a.created_on,
 r.rank as rank,
 g.guardian_type as guardian,
 c.class as g_class
@@ -183,12 +183,12 @@ SELECT * FROM users ORDER BY lname DESC;
 ASC- 1-9/ A-Z
 DESC- 9-1/ Z-A
 
-select s.sort as sort, p.name, p.location, p.price, p.person,p.days 
-from packages P 
+select s.sort as sort, p.name, p.location, p.price, p.person,p.days
+from packages P
 JOIN sort s ON p.sort_id = s.id;
 
-select sl.id,sl.spell_name,sl.mp_cost,sl.description, 
-st.school_name as spell_type 
+select sl.id,sl.spell_name,sl.mp_cost,sl.description,
+st.school_name as spell_type
 from spell_list sl
 JOIN spell_type st ON sl.spell_type_id = st.id
 ORDER BY sl.id ASC;

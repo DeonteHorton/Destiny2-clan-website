@@ -17,13 +17,13 @@ class Chat extends Component{
             data:[]
         };
 
-    this.socket = io('http://68.183.143.81:8080');
+    this.socket = io(`${process.env.REACT_APP_URL}:8080`);
 
     this.socket.on('RECEIVE_MESSAGE', function(data){
         addMessage(data);
     });
-    
-    const addMessage = data => {       
+
+    const addMessage = data => {
         this.setState({
             username:{},
             messages: [...this.state.messages, data]
@@ -39,25 +39,25 @@ class Chat extends Component{
         });
 
         this.setState({message: ''});
-        
+
         const data = {
             "user_name":user.username,
             "message":document.getElementById('chat-input').value,
              "timestamp":''
         }
 
-        fetch('http://104.248.234.208:3006/api/chat/create',{
+        fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/chat/create`,{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body:JSON.stringify(data)
         })
-        
+
         .then(repsonse => repsonse.json())
         document.getElementById('chat-input').value = '';
     }
-    
+
 }
     Messages = (prop) =>{
         const Name = {
@@ -89,7 +89,7 @@ class Chat extends Component{
                 })
             }
         }
-        fetch('http://104.248.234.208:3006/api/chat')
+        fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/chat`)
         .then(response => response.json())
         .then(data =>{
             this.setState({
@@ -100,7 +100,7 @@ class Chat extends Component{
     componentWillUnmount(){
         return this._isMouted = false;
     }
-    
+
 
     render(){
     const handleKeyPress = (ev) => {
@@ -108,7 +108,7 @@ class Chat extends Component{
             this.sendMessage()
         }
     }
-    
+
     const Name = {
         fontSize:'24px',
         color:'#aaa'
@@ -137,7 +137,7 @@ class Chat extends Component{
             <div id="messaging-wrap">
                 <div className="container-fuild">
                     <div className="row">
-                        <div className="col-sm-12"> 
+                        <div className="col-sm-12">
                         { user.username === 'Guest' ?  <h1 style={Name}>You must Sign in First!!</h1> :  MemberData}
 
                             {user.username === 'Guest' ?  null : this.state.messages.map((message,idx) => {
@@ -153,13 +153,13 @@ class Chat extends Component{
                     </div>
                     <div className="row">
                         <div className="col-sm-12 col-xs-12">
-                            <input 
-                            disabled={this.state.disabled} 
-                            maxLength="500" 
-                            id="chat-input" 
-                            type="text" 
-                            placeholder="Message" 
-                            onChange={ev => this.setState({message: ev.target.value})} 
+                            <input
+                            disabled={this.state.disabled}
+                            maxLength="500"
+                            id="chat-input"
+                            type="text"
+                            placeholder="Message"
+                            onChange={ev => this.setState({message: ev.target.value})}
                             onKeyPress={handleKeyPress}
                             />
 

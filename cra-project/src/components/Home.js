@@ -21,9 +21,9 @@ const Home = () =>{
                 <div className="container">
                     <div className="row row-padding">
                         <div className="col-sm-12">
-                    <p id="index-p">What? What are you doing here&hellip; I guess you're here to join the clan huh? Or you're already in the clan hahaha! The links are below for the sign up and login in page.</p>
-                    <Link className="null btn btn-primary" to='/signup'>Sign up</Link>
-                   <Link className="null btn btn-primary" to='/login'>Log in</Link>
+                        <p id="index-p">What? What are you doing here&hellip; I guess you're here to join the clan huh? Or you're already in the clan hahaha! The links are below for the sign up and login in page.</p>
+                        <Link className="null btn btn-primary" to='/signup'>Sign up</Link>
+                        <Link className="null btn btn-primary" to='/login'>Log in</Link>
                         </div>
                     </div>
                 </div>
