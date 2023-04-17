@@ -23,7 +23,7 @@ class Login extends React.Component{
 
         const [{user},dispatch] = this.context;
 
-        fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/accounts/search_account/${user_name}&${password}`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/accounts/search_account/${user_name}&${password}`)
         .then(response => response.json())
         .then(data => {
             if (data.length === 0 || data === undefined) {

@@ -21,7 +21,7 @@ import Header from './Header'
         if (name === '' || email === '' || comment === '') {
             window.alert('Missing Data in one or more input field')
         } else {
-            fetch(`${process.env.REACT_APP_URL}/:${process.env.REACT_APP_BACKEND_PORT}/api/contacts/create`,{
+            fetch(`${process.env.REACT_APP_BACKEND_URL}/api/contacts/create`,{
                 method:'POST',
                 headers: {
                  'Content-Type': 'application/json',

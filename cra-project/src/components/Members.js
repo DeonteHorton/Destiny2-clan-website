@@ -43,7 +43,7 @@ class Members extends Component{
 
 
     componentDidMount(){
-        fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/accounts/members_data`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/accounts/members_data`)
         .then(response => response.json())
         .then(data =>{
             this.setState({

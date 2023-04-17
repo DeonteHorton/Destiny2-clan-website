@@ -46,7 +46,7 @@ class Chat extends Component{
              "timestamp":''
         }
 
-        fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/chat/create`,{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/chat/create`,{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ class Chat extends Component{
                 })
             }
         }
-        fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/chat`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/chat`)
         .then(response => response.json())
         .then(data =>{
             this.setState({

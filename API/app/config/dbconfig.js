@@ -4,10 +4,10 @@ require('dotenv').config()
 
 const pool = mysql.createPool({
     connectionLimit:10,
-    host: process.env.REACT_APP_URL,
-    user:'root',
-    password:'',
-    database:'destiny2_clan_info',
+    host: process.env.REACT_APP_DB_HOST,
+    user: process.env.REACT_APP_DB_USER,
+    password: process.env.REACT_APP_DB_PASSWORD,
+    database: process.env.REACT_APP_DB_DATABASE,
     dateStrings:true
 })
 module.exports = pool;

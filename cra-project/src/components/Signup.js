@@ -129,7 +129,7 @@ class Sign_Up extends React.Component{
         }
         else{
             window.alert('Thank you for joining us!')
-            fetch(`${process.env.REACT_APP_URL}:${process.env.REACT_APP_BACKEND_PORT}/api/accounts/create`,{
+            fetch(`${process.env.REACT_APP_BACKEND_URL}/api/accounts/create`,{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -146,7 +146,8 @@ class Sign_Up extends React.Component{
     }
 
     render(){
-        const options = this.state.classes.map((subclass,idx) => <option key={idx} value={subclass.value}>{subclass.class}</option>)
+        const options = this.state.classes.map(( subclass, idx) => <option key={idx} value={subclass.value}>{subclass.class}</option>)
+
         if (this.state.redirect === true) {
             return <Redirect to='/login'/>
        }
