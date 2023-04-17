@@ -17,7 +17,7 @@ class Chat extends Component{
             data:[]
         };
 
-    this.socket = io(`${process.env.REACT_APP_URL}:8080`);
+    this.socket = io(`${process.env.REACT_APP_WEBSOCKET_URL}`);
 
     this.socket.on('RECEIVE_MESSAGE', function(data){
         addMessage(data);

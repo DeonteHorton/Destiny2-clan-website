@@ -1,12 +1,12 @@
 var express = require('express');
 var socket = require('socket.io');
+var https = require('https');
 require('dotenv').config()
 
 var app = express();
 
-
 let server = app.listen(8080,()=>{
-    console.log(`Server at ${process.env.REACT_APP_URL}`);
+    console.log(`Server at ${process.env.REACT_APP_WEBSOCKET_URL}`);
 })
 let io = socket(server);
 
